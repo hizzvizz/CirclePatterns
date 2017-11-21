@@ -13,33 +13,35 @@ Github -> https://github.com/hizzvizz/CirclePatterns
 			function drawing() {
 				var _max = 30000;	// max number of iterations
 				var _counter = 0;	// _counter initialized
-				var _step = 2;		// _step for increased spacing in the circles.
+				var _step = 3;		// _step for increased spacing in the circles.
 				for ( _counter = 0 ; _counter < _max ; _counter = _counter + _step) {  
 					// The variables _r, _g, and _b are the numbers 1-255 repeated at various frequencies to change the color of the circles.
 				
-					var _r =  _counter % 255;
-					var _g =  ( _counter * 2 ) % 255;
-					var _b =  ( _counter * 3 ) % 255;
+					var _r =  ( _counter * .3 ) % 255;
+					var _g =  ( _counter * 1.5 ) % 255;
+					var _b =  ( _counter * 2.3 ) % 255;
 					var _spin = ( _counter * .5 ) % 200; // _spin is an experimental value meant to make a non constant amplitude
-					var amp = 1.5*_spin;
+					var amp = 1.8 *_spin;
 					
 					// The three trig functions configured to control the placement of the circles.
 					var sinx_ = amp * Math.sin(_counter);
 					var cosx_ = amp * Math.cos(_counter);
 					var tanx_ = amp * Math.tan(_counter);
 					
-					var sin_cubed = amp * Math.sin(_counter) * Math.sin(_counter) * Math.sin(_counter);
+					var sin_pow = amp * Math.pow(Math.sin(_counter),3);
+					var tan_pow = amp * Math.pow(Math.tan(_counter),3);
+					var pow_sin = amp * Math.pow(3,sinx_);
 					
 					// Document write statements, create svg code to draw vectors in the html document
-					document.write("<g transform=translate(400,350) rotate(0)>")
-					//document.write("<circle cx=" + sinx_ + " cy=" + cosx_ + " r=1 stroke=black stroke-width=5 nofill "); 
-					document.write("<circle cx=" + sin_cubed + " cy=" + cosx_ + " r=1 stroke=black stroke-width=5 nofill "); 
+					document.write("<g transform=translate(400,375) rotate(0)>")
+					//document.write("<circle cx=" + sinx_ + " cy=" + cosx_ + " r=1 stroke-width=1 nofill "); 
+					document.write("<circle cx=" + sin_pow + " cy=" + cosx_ + " r=5 stroke-width=1 nofill "); 
 					document.write("style='stroke:rgb(" + _r + "," + _g + "," + _b + "') />");
 					document.write("</g>")
 				}
 			}
 			// The following svg tags set up the space where the vectors will be drawn.
-			document.write("<svg xmlns=svg xmlns:xlink=http://www.w3.org/2000/svg width=1400 height=700>");
+			document.write("<svg xmlns=svg xmlns:xlink=http://www.w3.org/2000/svg width=1400 height=800>");
 			drawing();
 			document.write("</svg>");
 		</script>
