@@ -1,0 +1,66 @@
+<!--
+Circle Spin / Arc by @rubenalexander -> https://steemit.com/@rubenalexander
+Github -> https://github.com/hizzvizz/CirclePatterns
+-->
+
+<html>
+	<body bgcolor="black">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+		<script>
+			// The drawing function uses a for loop to place circles based on the trig functions sinx_, cosx_, and tanx_
+			
+			function color_rand(_counter, mod1, max) {
+				var _r =  ( _counter * mod1 ) % max;
+				return _r;
+			}
+			
+			function drawing() {
+				var _max = 50000;	// max number of iterations
+				var _counter = 0;	// _counter initialized
+				var _step = 3;		// _step for increased spacing in the circles.
+				for ( _counter = 0 ; _counter < _max ; _counter = _counter + _step) {  
+						
+					var _spin = ( _counter * .5 ) % 10000; // _spin is an experimental value meant to make a non constant amplitude
+					var amp = .08 *_spin;
+					
+					// The three trig functions configured to control the placement of the circles.
+					var sinx_ = amp * Math.sin(_counter);
+					var cosx_ = amp * Math.cos(_counter);
+					var tanx_ = amp * Math.tan(_counter);
+					
+					var sin_pow = amp * Math.pow(Math.sin(_counter),3);
+					var tan_pow = amp * Math.pow(Math.tan(_counter),3);
+					var pow_sin = amp * Math.pow(3,sinx_);
+		
+					var _r = color_rand (_counter, 1, 200);
+					var _g = color_rand (_counter, 1, 200);
+					var _b = color_rand (_counter, 2, 200);
+		
+					var _sin_jit_x = sinx_ * cosx_
+		
+					// Document write statements, create svg code to draw vectors in the html document
+					document.write("<g transform=translate(400,375) rotate(0)>")
+					
+					//vanilla 
+					
+					//document.write("<circle cx=" + sinx_ + " cy=" + cosx_ + " r=1 stroke-width=1 nofill "); 
+					
+					//sin to some exponent
+					
+					document.write("<circle cx=" + sin_pow + " cy=" + cosx_ + " r=1 stroke-width=1 nofill "); 	
+					
+					//document.write("<circle cx=" + _sin_jit_x + " cy=" + cosx_ + " r=1 stroke-width=1 nofill "); 	
+					
+					document.write("style='stroke:rgb(" + _r + "," + _g + "," + _b + "') />");
+					document.write("</g>")
+				}
+			}
+			// The following svg tags set up the space where the vectors will be drawn.
+			document.write("<svg xmlns=svg xmlns:xlink=http://www.w3.org/2000/svg width=1400 height=800>");
+			drawing();
+			document.write("</svg>");
+		</script>
+
+	</body>
+</html>
